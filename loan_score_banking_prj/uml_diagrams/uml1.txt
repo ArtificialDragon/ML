@@ -1,0 +1,138 @@
+@startuml
+
+class CreditAgreement {
+  - Contract ID: int
+  - Date of Agreement: date
+  - Loan Amount: float
+  - Interest Rate: float
+  - Participants: Participants
+  - Repayment Plan: RepaymentPlan
+}
+
+class Participants {
+  - Bank: Bank
+  - Customer: Customer
+}
+
+class AgreementConclusion {
+  - Date of Agreement: date
+  - Loan Amount: float
+  - Interest Rate: InterestRate
+}
+
+class RepaymentPlan {
+  - Repayment Schedule: RepaymentSchedule
+  - Payment History: PaymentHistory
+}
+
+class Bank {
+  - Name: string
+  - Address: string
+}
+
+abstract class Customer {
+  - ID: int
+  - Name: string
+  - Address: string
+  - Phone Number: string
+  - Credit Score: CreditScore
+}
+
+class PersonalCustomer extends Customer {
+  - Date of Birth: date
+  - Passport Details: string
+}
+
+class BusinessCustomer extends Customer {
+  - Registration Number: string
+  - Company Name: string
+  - Registration Date: date
+}
+
+class InterestRate {
+  - Rate: float
+  - Rate Type: string
+}
+
+class RepaymentSchedule {
+  - Payment Dates: List<date>
+  - Payment Amounts: List<float>
+}
+
+class PaymentHistory {
+  - Payments: List<float>
+  - Payment Dates: List<date>
+}
+
+class CreditScore {
+  - Score: int
+  - Date Updated: date
+}
+
+class CreditPerformance {
+  - ID: int
+  - Loan: Loan
+  - Credit Score: CreditScore
+  - Loan Status: LoanStatus
+  - Delinquency: Delinquency
+  - Prepayment: Prepayment
+  - Payment History: PaymentHistory
+}
+
+class Loan {
+  - Loan ID: int
+  - Loan Amount: float
+  - Issue Date: date
+  - End Date: date
+  - Interest Rate: float
+  - Loan Term: int
+}
+
+class LoanStatus {
+  - ID: int
+  - Status: string
+  - Date Updated: date
+}
+
+class Delinquency {
+  - ID: int
+  - Number of Delinquencies: int
+  - Delinquency Amount: float
+  - Delinquency Dates: List<date>
+}
+
+class Prepayment {
+  - ID: int
+  - Prepayment Amount: float
+  - Prepayment Dates: List<date>
+}
+
+CreditAgreement o-- Participants
+CreditAgreement o-- AgreementConclusion
+CreditAgreement o-- RepaymentPlan
+
+Participants o-- Bank
+Participants o-- Customer
+
+Customer <|-- PersonalCustomer
+Customer <|-- BusinessCustomer
+
+AgreementConclusion o-- InterestRate
+
+RepaymentPlan o-- RepaymentSchedule
+RepaymentPlan o-- PaymentHistory
+
+Customer o-- CreditScore
+
+CreditPerformance o-- Loan
+CreditPerformance o-- CreditScore
+CreditPerformance o-- LoanStatus
+CreditPerformance o-- Delinquency
+CreditPerformance o-- Prepayment
+CreditPerformance <-- PaymentHistory
+
+Loan <-- CreditPerformance
+PaymentHistory o-- Loan
+PaymentHistory o-- CreditPerformance
+
+@enduml

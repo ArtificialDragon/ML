@@ -1,0 +1,40 @@
+@startuml
+
+!define RECTANGLE class
+
+RECTANGLE CreditParameters {
+  - Loan Amount: L
+  - Loan Term: T
+  - Interest Rate: β
+  - Number of Repayment Periods: K
+  - Repayment Periods: t_p*i
+  - Repayment Amounts: C_p*i
+  - Loan Share for Expenses: α
+  - Loan Share for Purchases: (1-α)
+}
+
+RECTANGLE RevenueLevels {
+  - Marginal Daily Revenue Level: B_m
+  - Expected Daily Revenue Level: B_e
+  - Achieved Daily Revenue Level: B_0
+}
+
+RECTANGLE OperationalChange {
+  - Coefficient: γ
+}
+
+RECTANGLE Info {
+  - Agreement Date: date
+  - ID: int
+}
+
+class FunctionVariables {
+  - Change in Operational Revenue: float
+}
+
+FunctionVariables o-- CreditParameters
+FunctionVariables o-- RevenueLevels
+FunctionVariables o-- OperationalChange
+FunctionVariables o-- Info
+
+@enduml

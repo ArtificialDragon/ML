@@ -1,0 +1,17 @@
+sql table structure:
+------------------------------------------------
+CREATE TABLE results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    B DOUBLE,
+    B0 DOUBLE,
+    Bpr DOUBLE,
+    x DOUBLE,
+    Ckr DOUBLE,
+    gamma DOUBLE,
+    alpha DOUBLE,
+    t INT,
+    t_pi VARCHAR(255),
+    C_ps VARCHAR(255)
+);
+----------------------------------------------
+
